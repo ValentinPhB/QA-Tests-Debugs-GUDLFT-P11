@@ -4,7 +4,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     Test: logged club want to reserve more than 12 places at once.
     Number of places for a tournament should not change.
     Points available of the club should not shange.
-    Message : 'You can not book more than (12) places per competition and less than (1) if you choose to participate.' is displayed.
+    Message : 'You can not book more than (12) places per competition and less than (1) if you choose to participate.' has to be displayed.
 
     Args:
         client ([type]): Fixture
@@ -44,7 +44,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     Test: logged club want to reserve more than 12 places at several times.
     Number of places for a tournament should be updated while total books for one competition by one club > 12.
     Points available of the club should be updated while total books for one competition by one club > 12.
-    Message : 'You can not book more than (12) places per competition and less than (1) if you choose to participate.' is displayed when
+    Message : 'You can not book more than (12) places per competition and less than (1) if you choose to participate.' has to be displayed when
     club wants to book more than 12 places for one competiton.
     
     Method : Using sessions(dict) who keep track of witch club has already booked places, count it and allow are not the possibility to book more.

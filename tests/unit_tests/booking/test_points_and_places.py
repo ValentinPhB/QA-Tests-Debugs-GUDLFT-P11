@@ -7,7 +7,7 @@ def test_points_and_places_should_not_change(client):
     Test: logged club use more than their points allowed.
     Number of places for a tournament should not change.
     Points available of the club should not change.
-    Message : 'Your club do not have enough points to do this.' as to be displayed.
+    Message : 'Your club do not have enough points to do this.' has to be displayed.
 
     Args:
         client ([type]): Fixture
@@ -52,7 +52,7 @@ def test_points_and_places_should_be_updated(client):
     Test: logged club use <= than their points allowed.
     Number of places for a tournament should be updated.
     Points available of the club should be updated.
-    Message : 'Great-booking complete!' is displayed.
+    Message : 'Great-booking complete!' has to be displayed.
 
     Args:
         client ([type]): Fixture
