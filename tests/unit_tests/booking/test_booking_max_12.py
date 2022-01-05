@@ -39,6 +39,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     # Cheking if places_competition is unchanged.
     assert message_expected_places_comp_updated not in data
 
+
     def test_not_allowed_more_than_12_places_in_one_competition_several_times(client):
         """
     Test: logged club want to reserve more than 12 places at several times.
