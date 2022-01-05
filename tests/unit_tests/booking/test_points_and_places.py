@@ -2,7 +2,7 @@ from app import loadClubs, loadCompetitions
 import random
 
 
-def test_points_and_places_should_not_change(client):
+def test_points_and_places_should_not_change(client_2):
     """
     Test: logged club use more than their points allowed.
     Number of places for a tournament should not change.
@@ -10,7 +10,7 @@ def test_points_and_places_should_not_change(client):
     Message : 'Your club do not have enough points to do this.' has to be displayed.
 
     Args:
-        client ([type]): Fixture
+        client_2 ([type]): Fixture
     """
     clubs = loadClubs()
     club = random.choice(clubs)
@@ -21,10 +21,10 @@ def test_points_and_places_should_not_change(client):
     # More places asks than points available.
     places = (club_points_available + 1)
 
-    comp_name = "Spring Festival"
-    comp_places = 25
+    comp_name = "Future"
+    comp_places = 20
 
-    response = client.post(
+    response = client_2.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
 
     message_expected = 'Your club do not have enough points to do this.'
@@ -47,7 +47,7 @@ def test_points_and_places_should_not_change(client):
     assert message_expected_places_comp_updated not in data
 
 
-def test_points_and_places_should_be_updated(client):
+def test_points_and_places_should_be_updated(client_2):
     """
     Test: logged club use <= than their points allowed.
     Number of places for a tournament should be updated.
@@ -62,10 +62,10 @@ def test_points_and_places_should_be_updated(client):
 
     places = 10
 
-    comp_name = "Fall Classic"
-    comp_places = 13
+    comp_name = "Future"
+    comp_places = 20
 
-    response = client.post(
+    response = client_2.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
 
     message_expected = 'Great-booking complete!'

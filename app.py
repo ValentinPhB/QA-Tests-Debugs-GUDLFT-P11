@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, flash, url_for, session
 
 
@@ -48,26 +50,34 @@ def create_app(config):
 
     @app.route('/purchasePlaces', methods=['POST'])
     def purchasePlaces():
-
-        # Verify previous actions to avoid favoritism (book more than 12 per competitions bu one club).
+        # Use or create dict in session to keep trace and avoid favoritism (<= 12 places by club per competitions).
         if 'track' not in session:
             keys = [x['name'] for x in competitions]
             track = {x: [] for x in keys}
             session['track'] = track
         memory = session.get('track')
+        # Extract specified club and competition
         competition = [c for c in competitions if c['name']
                        == request.form['competition']][0]
         club = [c for c in clubs if c['name'] == request.form['club']][0]
+        # Get information 
         placesRequired = int(request.form['places'])
         points_club = int(club['points'])
-
+        # Checking if club has already booked some places and how many.
         to_check = memory[competition['name']]
         already_booked_number = to_check.count(club['name'])
         number_place_available = int(competition['numberOfPlaces'])
-
-        if placesRequired > number_place_available:
+        # Checking date of competition and compare to actual date
+        date_time_str = competition['date']
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Date
+        if date_time_str < now:
+            flash('You can not book places for a past competition.')
+        # Places available
+        elif placesRequired > number_place_available:
             flash(
                 f'You can not book {placesRequired} places for this competition. Only {number_place_available} places left.')
+        # <= 12 places booked
         elif placesRequired <= points_club and 0 < placesRequired <= 12 and (already_booked_number + placesRequired) <= 12:
             competition['numberOfPlaces'] = int(
                 competition['numberOfPlaces']) - placesRequired
@@ -77,8 +87,10 @@ def create_app(config):
             memory[competition['name']].extend([club['name']] * placesRequired)
             session['track'] = memory
             flash('Great-booking complete!')
+        # Enough points to book ?
         elif 0 < placesRequired > points_club:
             flash('Your club do not have enough points to do this.', 'error')
+        # More than 12 places booked for on copetition
         else:
             flash('You can not book more than (12) places per competition and less than (1) if you choose to participate.', 'error')
 

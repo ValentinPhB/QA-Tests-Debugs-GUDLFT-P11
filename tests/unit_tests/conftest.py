@@ -31,7 +31,7 @@ def client_2(mocker):
         {
             "name": "Future",
             "date": "2030-11-02 17:00:00",
-            "numberOfPlaces": "10"
+            "numberOfPlaces": "20"
         },
     ])
     app = create_app({"TESTING": True})

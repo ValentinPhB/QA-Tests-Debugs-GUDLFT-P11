@@ -1,5 +1,5 @@
 
-def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
+def test_not_allowed_more_than_12_places_in_one_competition_at_once(client_2):
     """
     Test: logged club want to reserve more than 12 places at once.
     Number of places for a tournament should not change.
@@ -7,7 +7,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     Message : 'You can not book more than (12) places per competition and less than (1) if you choose to participate.' has to be displayed.
 
     Args:
-        client ([type]): Fixture
+        client_2 ([type]): Fixture
     """
     club_name = "Simply Lift"
     club_points_available = 13
@@ -15,10 +15,10 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     # Place = club_points_available
     places = club_points_available
 
-    comp_name = "Spring Festival"
-    comp_places = 25
+    comp_name = "Future"
+    comp_places = 20
 
-    response = client.post(
+    response = client_2.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
 
     message_expected = 'You can not book more than (12) places per competition and less than (1) if you choose to participate.'
@@ -39,7 +39,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     # Cheking if places_competition is unchanged.
     assert message_expected_places_comp_updated not in data
 
-    def test_not_allowed_more_than_12_places_in_one_competition_several_times(client):
+    def test_not_allowed_more_than_12_places_in_one_competition_several_times(client_2):
         """
     Test: logged club want to reserve more than 12 places at several times.
     Number of places for a tournament should be updated while total books for one competition by one club > 12.
@@ -50,7 +50,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     Method : Using sessions(dict) who keep track of witch club has already booked places, count it and allow are not the possibility to book more.
     
     Args:
-        client ([type]): Fixture
+        client_2 ([type]): Fixture
     """
 
     club_name = "Simply Lift"
@@ -59,8 +59,8 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     places = 6
     places_2 = 7
 
-    comp_name = "Spring Festival"
-    comp_places = 25
+    comp_name = "Future"
+    comp_places = 20
     
     message_expected_club_points_updated = f"Points available: {club_points - places}"
     
@@ -68,7 +68,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     message_expected_places_comp_updated = f"Number of Places: {count}"
 
     # First try (Less than 12 for one competiton/club)
-    response = client.post(
+    response = client_2.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
     data = response.get_data(as_text=True)
 
@@ -85,7 +85,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client):
     assert message_expected_places_comp_updated in data
     
     # Seconde try (More than 12 for one competiton/club)
-    response_2 = client.post(
+    response_2 = client_2.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places_2})
     data_2 = response_2.get_data(as_text=True)
     
