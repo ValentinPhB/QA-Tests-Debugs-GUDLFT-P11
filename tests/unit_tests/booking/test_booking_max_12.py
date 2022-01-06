@@ -73,7 +73,7 @@ def test_not_allowed_more_than_12_places_in_one_competition_at_once(client_2):
     data = response.get_data(as_text=True)
 
     # Total for this club less than 12 it's ok.
-    first_message_expected = 'Great-booking complete!'
+    first_message_expected = f'Great-booking complete! You have book {places}.'
     
     # Cheking if data needed is ok.
     assert response.status_code == 200

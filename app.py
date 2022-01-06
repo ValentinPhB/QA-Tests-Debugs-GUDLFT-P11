@@ -86,7 +86,7 @@ def create_app(config):
             # Add track of reservation to session to avoid favoritism (book more than 12 per competitions bu one club).
             memory[competition['name']].extend([club['name']] * placesRequired)
             session['track'] = memory
-            flash('Great-booking complete!')
+            flash(f'Great-booking complete! You have book {placesRequired}.')
         # Enough points to book ?
         elif 0 < placesRequired > points_club:
             flash('Your club do not have enough points to do this.', 'error')
