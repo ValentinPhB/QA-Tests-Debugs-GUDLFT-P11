@@ -1,4 +1,7 @@
-def test_points_and_places_should_not_change(client_2):
+from tests.unit_tests.conftest import client
+
+
+def test_points_and_places_should_not_change(client):
     """
     Test: logged club wants to book places for past competiton.
     Number of places for a tournament should not change.
@@ -6,7 +9,7 @@ def test_points_and_places_should_not_change(client_2):
     Message : 'You can not book places for a past competition.' has to be displayed.
 
     Args:
-        client_2 ([type]): Fixture
+        client ([type]): Fixture
     """
     club_name = "Simply Lift"
     club_points_available = 13
@@ -16,7 +19,7 @@ def test_points_and_places_should_not_change(client_2):
     comp_name = "Spring Festival"
     comp_places = 25
 
-    response = client_2.post(
+    response = client.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
 
     message_expected = 'You can not book places for a past competition.'
@@ -37,4 +40,4 @@ def test_points_and_places_should_not_change(client_2):
     assert message_expected_places_comp_unchanged in data
 
 
-# test_points_and_places_should_be_updated(client_2) in '.test_points_and_places' already test when conpetiton's is ok.
+# test_points_and_places_should_be_updated(client) in '.test_points_and_places' already test when conpetiton's is ok.

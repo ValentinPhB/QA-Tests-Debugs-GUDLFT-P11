@@ -4,14 +4,13 @@ from app import create_app
 
 
 @pytest.fixture
-def client():
+def client_2(mocker):
     app = create_app({"TESTING": True})
     with app.test_client() as client:
         yield client
 
-
 @pytest.fixture
-def client_2(mocker):
+def client(mocker):
     mocker.patch('app.loadCompetitions', return_value=[
         {
             "name": "Spring Festival",

@@ -1,4 +1,7 @@
-def test_points_and_places_should_not_change(client_2):
+from tests.unit_tests.conftest import client
+
+
+def test_points_and_places_should_not_change(client):
     """
     Test: logged club wants to book more places than number available.
     Number of places for a tournament should not change.
@@ -6,7 +9,7 @@ def test_points_and_places_should_not_change(client_2):
     Message : 'You can not book {places} places for this competition. Only {numbre_place_available} places left.' has to be displayed.
 
     Args:
-        client_2 ([type]): Fixture
+        client ([type]): Fixture
     """
     club_name = "Simply Lift"
     club_points_available = 13
@@ -16,7 +19,7 @@ def test_points_and_places_should_not_change(client_2):
     comp_name = 'Small'
     comp_places = 3
 
-    response = client_2.post(
+    response = client.post(
         '/purchasePlaces', data={'club': club_name, 'competition': comp_name, 'places': places})
 
     message_expected = f'You can not book {places} places for this competition. Only {comp_places} places left.'

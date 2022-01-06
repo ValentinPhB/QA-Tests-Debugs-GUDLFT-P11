@@ -14,8 +14,7 @@ def loadCompetitions():
     with open('competitions.json') as comps:
         listOfCompetitions = json.load(comps)['competitions']
         return listOfCompetitions
-
-
+        
 def create_app(config):
     app = Flask(__name__)
     app.secret_key = 'something_special'
@@ -32,7 +31,7 @@ def create_app(config):
         try:
             club = [club for club in clubs if club['email']
                     == request.form['email']][0]
-            return render_template('welcome.html', club=club, competitions=competitions)
+            return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
         except IndexError:
             flash("Sorry, that email was not found.", 'error')
             return render_template('index.html'), 405
@@ -86,7 +85,7 @@ def create_app(config):
             # Add track of reservation to session to avoid favoritism (book more than 12 per competitions bu one club).
             memory[competition['name']].extend([club['name']] * placesRequired)
             session['track'] = memory
-            flash(f'Great-booking complete! You have book {placesRequired}.')
+            flash(f'Great-booking complete! You have book {placesRequired} places.')
         # Enough points to book ?
         elif 0 < placesRequired > points_club:
             flash('Your club do not have enough points to do this.', 'error')
@@ -94,10 +93,13 @@ def create_app(config):
         else:
             flash('You can not book more than (12) places per competition and less than (1) if you choose to participate.', 'error')
 
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
 
     # TODO: Add route for points display
-
+    @app.route('/table', methods=['GET'])
+    def table():
+        return render_template('table.html', clubs=clubs)
+        
     @app.route('/logout')
     def logout():
         session.pop('track', None)
