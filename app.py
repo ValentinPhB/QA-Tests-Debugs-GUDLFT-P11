@@ -6,14 +6,12 @@ from flask import Flask, render_template, request, redirect, flash, url_for, ses
 
 def loadClubs():
     with open('clubs.json') as c:
-        listOfClubs = json.load(c)['clubs']
-        return listOfClubs
+        return json.load(c)['clubs']
 
 
 def loadCompetitions():
     with open('competitions.json') as comps:
-        listOfCompetitions = json.load(comps)['competitions']
-        return listOfCompetitions
+        return json.load(comps)['competitions']
         
 def create_app(config):
     app = Flask(__name__)
@@ -95,7 +93,6 @@ def create_app(config):
 
         return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
 
-    # TODO: Add route for points display
     @app.route('/table', methods=['GET'])
     def table():
         return render_template('table.html', clubs=clubs)
