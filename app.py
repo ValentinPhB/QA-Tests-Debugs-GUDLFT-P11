@@ -26,24 +26,35 @@ def create_app(config):
 
     @app.route('/showSummary', methods=['POST'])
     def showSummary():
-        try:
-            club = [club for club in clubs if club['email']
-                    == request.form['email']][0]
+        existing_email = [ c['email'] for c in clubs]
+        if request.form['email'] in existing_email:
+            club = [club for club in clubs if club['email'] == request.form['email']][0]
             return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
-        except IndexError:
-            flash("Sorry, that email was not found.", 'error')
-            return render_template('index.html'), 405
+        flash("Sorry, that email was not found.", 'error')
+        return render_template('index.html'), 405
 
     @app.route('/book/<competition>/<club>')
     def book(competition, club):
-        try:
+        existing_club = [ c['name'] for c in clubs]
+        existing_competition = [ comp['name'] for comp in competitions]
+        if competition in existing_competition and club in existing_club:
             foundClub = [c for c in clubs if c['name'] == club][0]
             foundCompetition = [
                 c for c in competitions if c['name'] == competition][0]
             return render_template('booking.html', club=foundClub, competition=foundCompetition)
-        except IndexError:
-            flash("Something went wrong-please try again")
-            return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
+        flash("Something went wrong-please try again")
+        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
+    
+    # @app.route('/book/<competition>/<club>')
+    # def book(competition, club):
+    #     try:
+    #         foundClub = [c for c in clubs if c['name'] == club][0]
+    #         foundCompetition = [
+    #             c for c in competitions if c['name'] == competition][0]
+    #         return render_template('booking.html', club=foundClub, competition=foundCompetition)
+    #     except IndexError:
+    #         flash("Something went wrong-please try again")
+    #         return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions)
 
     @app.route('/purchasePlaces', methods=['POST'])
     def purchasePlaces():
