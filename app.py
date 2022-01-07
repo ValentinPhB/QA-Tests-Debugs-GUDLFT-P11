@@ -13,6 +13,9 @@ def loadCompetitions():
     with open('competitions.json') as comps:
         return json.load(comps)['competitions']
 
+# Determine how many points needed for book one place 
+def ratio():
+    return 3
 
 def create_app(config):
     app = Flask(__name__)
@@ -24,6 +27,9 @@ def create_app(config):
     # Checking actual date (to pass to template welcome.html)
     date_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    # points_for_places : how many points for book one place. Default = 1
+    points_for_places = ratio()
+    
     @app.route('/')
     def index():
         return render_template('index.html')
@@ -34,7 +40,7 @@ def create_app(config):
         if request.form['email'] in existing_email:
             club = [club for club in clubs if club['email']
                     == request.form['email']][0]
-            return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now)
+            return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now, points_for_places=points_for_places)
         flash("Sorry, that email was not found.", 'error')
         return render_template('index.html'), 405
 
@@ -46,9 +52,9 @@ def create_app(config):
             foundClub = [c for c in clubs if c['name'] == club][0]
             foundCompetition = [
                 c for c in competitions if c['name'] == competition][0]
-            return render_template('booking.html', club=foundClub, competition=foundCompetition)
+            return render_template('booking.html', club=foundClub, competition=foundCompetition, points_for_places=points_for_places)
         flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now)
+        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now, points_for_places=points_for_places)
 
     @app.route('/purchasePlaces', methods=['POST'])
     def purchasePlaces():
@@ -73,6 +79,7 @@ def create_app(config):
         already_booked_number = to_check.count(club['name'])
         number_place_available = int(competition['numberOfPlaces'])
 
+        # Date for checking
         date_competition = competition['date']
         
         # Answer if post request to passed competition
@@ -85,10 +92,10 @@ def create_app(config):
                 f'You can not book {placesRequired} places for this competition. Only {number_place_available} places left.')
 
         # <= 12 places booked
-        elif placesRequired <= points_club and 0 < placesRequired <= 12 and (already_booked_number + placesRequired) <= 12:
+        elif placesRequired * points_for_places <= points_club and 0 < placesRequired <= 12 and (already_booked_number + placesRequired) <= 12:
             competition['numberOfPlaces'] = int(
                 competition['numberOfPlaces']) - placesRequired
-            club['points'] = points_club - placesRequired
+            club['points'] = points_club - placesRequired * points_for_places
 
             # Add track of reservation to session to avoid favoritism (book more than 12 per competitions bu one club).
             memory[competition['name']].extend([club['name']] * placesRequired)
@@ -97,14 +104,15 @@ def create_app(config):
                 f'Great-booking complete! You have book {placesRequired} places.')
 
         # Enough points to book ?
-        elif 0 < placesRequired > points_club:
-            flash('Your club do not have enough points to do this.', 'error')
+        elif 0 < placesRequired * points_for_places and placesRequired * points_for_places > points_club:
+            flash(
+                f'Your club do not have enough points to do this. You need {points_for_places} point(s) for ONE place.', 'error')
 
         # More than 12 places booked for on copetition
         else:
             flash('You can not book more than (12) places per competition and less than (1) if you choose to participate.', 'error')
 
-        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now)
+        return render_template('welcome.html', club=club, clubs=clubs, competitions=competitions, date_now=date_now, points_for_places=points_for_places)
 
     @app.route('/table', methods=['GET'])
     def table():
