@@ -2,15 +2,8 @@ from locust import HttpUser, task
 
 
 class ProjectPerfTest(HttpUser):
-
-    def on_start(self):
-        self.client.get("/")
-
-    def on_stop(self):
-        self.client.get("/logout")
-        
     @task
-    def index(self):
+    def on_start(self):
         self.client.get("/")
 
     @task
@@ -30,7 +23,6 @@ class ProjectPerfTest(HttpUser):
     def purchasePlaces(self):
         self.client.post(
             '/purchasePlaces', data={'club': 'Simply Lift', 'competition': "Fall Classic", 'places': 3})
-
     @task
-    def logout(self):
-        self.client.get('/logout')
+    def on_stop(self):
+        self.client.get("/logout")
