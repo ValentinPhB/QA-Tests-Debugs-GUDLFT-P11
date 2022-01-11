@@ -15,12 +15,12 @@
 ## 1. General info
 ### A) *Original request*
 
-The legacy is a proof of concept (POC) project to show a light-weight version of competition booking platform (*GUDLFT*). The aim is the keep things as light as possible, and use feedback from the users to iterate. It need to be tested, refactored, optimised and some new functionnalities are expected.
-Also, the first version crash and it need to be fixed. [OriginalRepository](https://github.com/OpenClassrooms-Student-Center/Python_Testing).
+The legacy is a proof of concept (POC) project to show a light-weight version of competition booking platform (*GUDLFT*). The aim is the keep things as light as possible, and use feedback from the users to iterate. It needs to be tested, refactored, optimised and some new functionnalities are expected.
+Also, the first version crash and it needs to be fixed. [OriginalRepository](https://github.com/OpenClassrooms-Student-Center/Python_Testing).
 
 ### B) *Current repository*
 
-This repository contain 12 branches merged to main. It answer to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integrations test, "functionnals" test and performance test) and add a "Display bord".
+This repository contain 12 branches merged to main. Answers to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integrations test, "functionnals" test and performance test) and add a "Display bord".
 After using this application, some more issues had to be patched.
 [Go to Branches Details](https://github.com/ValentinPhB/QA-Tests-Debugs-GUDLFT-P11/edit/main/README.md#5-branches-details).
 
