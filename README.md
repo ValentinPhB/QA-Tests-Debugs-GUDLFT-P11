@@ -137,7 +137,7 @@ Then launch locust :
 $ cd test/performance_test
 $ locust
 ```
-__PARAMETERS ASKED__ :  
+__REQUESTED PARAMETERS__ :  
 __Number of users(peak concurrency)__
 ```
 6
