@@ -20,7 +20,7 @@ Also, the first version crash and it need to be fixed. [OriginalRepository](http
 
 ### B) *Current repository*
 
-This repository contain 12 branches merged to main. It answer to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integrations test, functionnals test and performance test) and add a "Display bord".
+This repository contain 12 branches merged to main. It answer to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integrations test, "functionnals" test and performance test) and add a "Display bord".
 After using this application, some more issues had to be patched.
 [Go to Branches Details](https://github.com/ValentinPhB/QA-Tests-Debugs-GUDLFT-P11/edit/main/README.md#5-branches-details).
 
@@ -156,9 +156,9 @@ The branches are listed from the most recent to the initial one :
 
 * QA : *Quality assurance*
 * locust : *Performance test*
-* amelioration/editable_ratio_points_for_place : *functionnality asked by mentor*
+* amelioration/editable_ratio_points_for_place : *functionality asked by mentor*
 * error/book_url : __Issues found__ ; *wrong url crash the application*
-* func/display-points-avoid-favoritism : *functionnality asked* [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/7)
+* func/display-points-avoid-favoritism : *functionality asked* [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/7)
 * bug/booking-places-in-past-competitions : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/5)
 * bug/book-no-more-than-12-places : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/4)
 * bug/can-not-book-more-than-available : __Issues found__
