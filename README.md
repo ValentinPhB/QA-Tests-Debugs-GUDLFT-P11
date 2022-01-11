@@ -15,13 +15,14 @@
 ## 1. General info
 ### A) *Original request*
 
-The legacy is a proof of concept (POC) project to show a light-weight version of competition booking platform (*GUDLFT*). The aim is the keep things as light as possible, and use feedback from the users to iterate. It needs to be tested, refactored, optimised and some new functionnalities are expected.
+The legacy is a proof of concept (POC) project to show a light-weight version of competition booking platform (*GUDLFT*). The aim is the keep things as light as possible, and use feedback from the users to iterate. It needs to be tested, refactored, optimised and some new functionalities are expected.
 Also, the first version crash and it needs to be fixed. [OriginalRepository](https://github.com/OpenClassrooms-Student-Center/Python_Testing).
 
 ### B) *Current repository*
 
-This repository contain 12 branches merged to main. Answers to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integrations test, "functionnals" test and performance test) and add a "Display bord".
-After using this application, some more issues had to be patched.
+This repository contains 12 branches merged to main. Answers to [issues](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues), test the application (Unit test, integration test, "functionnal" test and performance test) and add a "Display bord".
+
+Some more issues, not speciffied in original repository was found and had to be patched.
 [Go to Branches Details](https://github.com/ValentinPhB/QA-Tests-Debugs-GUDLFT-P11/edit/main/README.md#5-branches-details).
 
 
@@ -77,9 +78,9 @@ Python 3.10.0
 
 ## 3. Setup for Unix
 
-__Original data is unusable. Competition's dates are passed so you can't book places.
-tests/unit_test/conftest.py client(s) fixtures mock data to fix this.__
-__That's why this README.md dont show you how to test this application from browser.__
+__Original data is unusable. Competition's dates are passed so you can't book places if the application works correctly.
+tests/unit_test/conftest.py "client(s)" fixtures mock data to fix this.__
+__That's why this README.md don't show you how to test this application from browser with flask.__
 
 Only first-time use :
 After downloading QA-Tests-Debugs-GUDLFT-P11.main from Github, extract it to a location of your choice (exemple : "PATH").
@@ -161,7 +162,7 @@ The branches are listed from the most recent to the initial one :
 * func/display-points-avoid-favoritism : *functionality asked* [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/7)
 * bug/booking-places-in-past-competitions : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/5)
 * bug/book-no-more-than-12-places : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/4)
-* bug/can-not-book-more-than-available : __Issues found__
+* bug/can-not-book-more-than-available : __Issues found__ : explicitly named. 
 * bug/use-more-than-points-allowed : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/2) and [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/6)
 * legacy 
 * bug/unknow-email-crash : [issue](https://github.com/OpenClassrooms-Student-Center/Python_Testing/issues/1)
@@ -171,4 +172,3 @@ The branches are listed from the most recent to the initial one :
 ## 6. Author
 
 Valentin Pheulpin
-
