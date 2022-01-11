@@ -137,6 +137,19 @@ Then launch locust :
 $ cd test/performance_test
 $ locust
 ```
+__PARAMETERS ASKED__ :<br />
+__Number of users(peak concurrency)__
+```
+6
+```
+__Spawn rate (users started/second)__
+```
+1
+```
+__Host__
+```
+http://127.0.0.1:5000 
+```
 
 ## 5. Branches Details
 The branches are listed from the most recent to the initial one :
