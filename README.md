@@ -87,7 +87,7 @@ Or if you use git, download it from [here](https://github.com/ValentinPhB/QA-Tes
 
 Create a virtual environment in "PATH" and install packages from requirements.txt.
 ```
-$ cd ../path/to/PYTHON_TESTING
+$ cd ../path/to/QA-Tests-Debugs-GUDLFT-P11
 $ python3 -m venv env
 $ source env/bin/activate
 $ python3 -m pip install -U pip
