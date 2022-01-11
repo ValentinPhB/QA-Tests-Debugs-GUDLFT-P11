@@ -1,5 +1,6 @@
 from tests.unit_tests.conftest import client
 
+
 def test_points_and_places_should_be_updated(client):
     """
     Test: logged club use <= than their points allowed.
@@ -30,11 +31,11 @@ def test_points_and_places_should_be_updated(client):
 
     data = response.get_data(as_text=True)
 
-    # Cheking if data needed is ok.
+    # Check if data needed is ok.
     assert response.status_code == 200
-    # Cheking if "conditionnal if " in purchasePLaces redirect correctly.
+    # Check if "conditional if " in purchasePLaces redirect correctly.
     assert message_expected in data
-    # Cheking if points_avalable is updated.
+    # Check if points_available is updated.
     assert message_expected_club_points_updated in data
-    # Cheking if places_competition is updated.
+    # Check if places_competition is updated.
     assert message_expected_places_comp_updated in data

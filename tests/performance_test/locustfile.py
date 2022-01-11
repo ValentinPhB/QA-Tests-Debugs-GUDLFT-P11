@@ -23,6 +23,7 @@ class ProjectPerfTest(HttpUser):
     def purchasePlaces(self):
         self.client.post(
             '/purchasePlaces', data={'club': 'Simply Lift', 'competition': "Fall Classic", 'places': 3})
+
     @task
     def on_stop(self):
         self.client.get("/logout")

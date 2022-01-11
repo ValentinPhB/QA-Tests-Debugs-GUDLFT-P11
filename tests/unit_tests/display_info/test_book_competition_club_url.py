@@ -24,7 +24,7 @@ def test_display_information_book_url_if_competition_or_club_exists(client):
             data = response_3.get_data(as_text=True)
             assert message_expected in data
 
-            response_4  = client.get(
+            response_4 = client.get(
                 f"/book/{wrong_competition}/{club_1}")
             data_2 = response_4.get_data(as_text=True)
             assert message_expected in data_2

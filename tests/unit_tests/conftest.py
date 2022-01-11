@@ -6,7 +6,7 @@ from app import create_app
 @pytest.fixture
 def client(mocker):
     """
-    Client with ratio controled by app.py.
+    Client with ratio controlled by app.py.
     """
     mocker.patch('app.loadCompetitions', return_value=[
         {
@@ -49,7 +49,7 @@ def client_2(mocker):
 @pytest.fixture
 def client_3(mocker):
     """
-    Client with determinated ratio() to control assertion.
+    Client with "mocked" ratio() to control pytest assertion.
     """
     mocker.patch('app.loadCompetitions', return_value=[
         {
