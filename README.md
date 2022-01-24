@@ -135,7 +135,7 @@ $ flask run
 
 Then launch locust :
 ```
-$ cd test/performance_test
+$ cd tests/performance_test
 $ locust
 ```
 __REQUESTED PARAMETERS__ :  
